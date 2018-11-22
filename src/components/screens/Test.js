@@ -12,7 +12,7 @@ export default class Test extends Component {
 				<Text> textInComponent </Text>
 				<Button
 					title="Press"
-					onPress={e => this.props.navigation.navigate('Test2Page')}
+					onPress={e => this.props.navigation.navigate('Register')}
 				/>
 			</View>
 		);
