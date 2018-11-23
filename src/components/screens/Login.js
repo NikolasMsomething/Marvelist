@@ -12,7 +12,7 @@ const User = t.struct({
 	password: t.String
 });
 
-//CREATES FORM MODEL USING tcombo
+//CREATES FORM MODEL USING tcomb
 
 const options = {
 	fields: {
@@ -81,6 +81,7 @@ class Login extends Component {
 	};
 
 	//React native navigation options for header ^
+	//React navigation provides header
 
 	onPress = () => {
 		let value = this.refs.form.getValue();
@@ -99,7 +100,13 @@ class Login extends Component {
 				</View>
 				<View style={styles.container}>
 					<Form ref="form" type={User} options={options} />
-					<Button title="Sign in" onPress={this.onPress} />
+					<Button
+						title="Sign in"
+						onPress={e => {
+							this.onPress();
+							this.props.navigation.navigate('Home');
+						}}
+					/>
 				</View>
 			</>
 		);

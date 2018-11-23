@@ -68,6 +68,26 @@ export const asyncPostToLogin = (username, password) => dispatch => {
 		});
 };
 
+export const asyncGetFromMarvel = name => async dispatch => {
+	try {
+		let response = await fetch(`${API_BASE_URL}/api/marvel?character=${name}`, {
+			method: 'GET',
+			mode: 'cors'
+		});
+		let jsoned = await response.json();
+		console.log(jsoned);
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const changeName = value => {
+	return {
+		type: 'CHANGE_NICK',
+		value
+	};
+};
+
 export const SAVE_AUTH = 'SAVE_AUTH';
 export const saveAuthToStore = value => {
 	return {

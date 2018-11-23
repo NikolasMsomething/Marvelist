@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View, Button, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { testAction, asyncPostToRegister } from '../../actions/index';
+import {
+	testAction,
+	asyncPostToRegister,
+	changeName
+} from '../../actions/index';
 import t from 'tcomb-form-native';
 import { Font } from 'expo';
 
@@ -68,10 +72,20 @@ const styles = StyleSheet.create({
 	signUp: {
 		fontSize: 30,
 		textAlign: 'center'
+	},
+	haveAccount: {
+		textAlign: 'center',
+		marginTop: 40
 	}
 });
 
 class Register extends Component {
+	constructor() {
+		super();
+
+		this.onPress = this.onPress.bind(this);
+	}
+
 	static navigationOptions = {
 		title: 'Marvelist',
 		headerStyle: {
@@ -100,10 +114,11 @@ class Register extends Component {
 		}
 	}
 
-	onPress = () => {
+	onPress() {
 		let value = this.refs.form.getValue();
 
 		if (value) {
+			this.props.dispatch(changeName('added'));
 			this.props.dispatch(
 				asyncPostToRegister(
 					value.name,
@@ -113,7 +128,7 @@ class Register extends Component {
 				)
 			);
 		}
-	};
+	}
 
 	render() {
 		return (
@@ -124,7 +139,20 @@ class Register extends Component {
 				</View>
 				<View style={styles.container}>
 					<Form ref="form" type={User} options={options} />
-					<Button title="Sign Up" onPress={this.onPress} />
+					<Button
+						title="Sign Up"
+						onPress={() => {
+							return this.onPress();
+						}}
+					/>
+				</View>
+				<View>
+					<Text
+						style={styles.haveAccount}
+						onPress={e => this.props.navigation.navigate('Login')}
+					>
+						Already Have An Account?
+					</Text>
 				</View>
 			</>
 		);
