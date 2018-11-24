@@ -22,18 +22,32 @@ class Home extends Component {
 		let characterName = this.state.characterName;
 		return (
 			<View>
-				<Text> textInComponent </Text>
-				<TextInput
-					ref={this.textInput}
-					onChangeText={text => this.setState({ characterName: text })}
-					style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				/>
-				<Button
-					title="Search"
-					onPress={() => {
-						this.onPressMarvel(characterName);
+				<View
+					style={{
+						width: 80 + '%',
+						height: 100 + '%',
+						flexDirection: 'column',
+						marginLeft: 10 + '%',
+						marginRight: 10 + '%'
 					}}
-				/>
+				>
+					<Text style={{ fontSize: 30 }}> Search For a Character </Text>
+					<TextInput
+						ref={this.textInput}
+						onChangeText={text => this.setState({ characterName: text })}
+						style={{
+							height: 40,
+							borderColor: 'gray',
+							borderWidth: 1
+						}}
+					/>
+					<Button
+						title="Search"
+						onPress={() => {
+							this.onPressMarvel(characterName);
+						}}
+					/>
+				</View>
 			</View>
 		);
 	}
@@ -41,7 +55,8 @@ class Home extends Component {
 
 function mapStateToProps(state) {
 	return {
-		authToken: state.login.authToken
+		authToken: state.login.authToken,
+		characters: state.character.characters
 	};
 }
 
